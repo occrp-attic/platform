@@ -16,9 +16,12 @@ before_install:
   - docker --version
   - docker-compose --version
 
+install:
+  - docker build -t alephdata/platform:${TRAVIS_BRANCH} .
+
 script:
-  - docker build -t alephdata/platform:${TRAVIS_TAG} .
-  - if [ "$TRAVIS_TAG" -ne "" ]; then
-      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-      docker push alephdata/platform:${TRAVIS_TAG};
-    fi
+  - sleep 1
+
+after_success:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker push alephdata/platform:${TRAVIS_BRANCH}
