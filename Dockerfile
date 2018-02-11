@@ -1,0 +1,30 @@
+FROM debian:stretch
+ENV DEBIAN_FRONTEND noninteractive
+
+# Enable non-free archive for `unrar`.
+RUN echo "deb http://http.us.debian.org/debian stretch non-free" >/etc/apt/sources.list.d/nonfree.list
+RUN apt-get -qq -y update \
+    && apt-get -qq -y upgrade \
+    && apt-get -qq -y install wget git less \
+        python-pip build-essential python-dev libxml2-dev libxslt1-dev \
+        libpq-dev apt-utils ca-certificates postgresql-client unrar locales \
+        libtiff5-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev \
+        poppler-utils poppler-data unrtf pstotext libwebp-dev python-pil \
+        imagemagick-common imagemagick mdbtools p7zip-full libboost-python-dev libgsf-1-dev \
+        libtesseract-dev libjpeg-dev libicu-dev libldap2-dev libsasl2-dev djvulibre-bin \
+        libleptonica-dev tesseract-ocr-all \    
+    && apt-get -qq -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# New version of the PST file extractor
+RUN mkdir /tmp/libpst \
+    && wget -qO- http://www.five-ten-sg.com/libpst/packages/libpst-0.6.71.tar.gz | tar xz -C /tmp/libpst --strip-components=1 \
+    && cd /tmp/libpst \
+    && ln -s /usr/bin/python /usr/bin/python2.7.10 \
+    && ./configure \
+    && make \
+    && make install \
+    && rm -rf /tmp/libpst
+
+RUN pip install -q --upgrade pip && pip install -q --upgrade setuptools
