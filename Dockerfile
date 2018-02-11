@@ -16,7 +16,7 @@ RUN apt-get -qq -y update \
         # package tools
         unrar p7zip-full  \
         # image processing, djvu
-        imagemagick-common imagemagick mdbtoolss djvulibre-bin \
+        imagemagick-common imagemagick mdbtools djvulibre-bin \
         libtiff5-dev libjpeg-dev libfreetype6-dev libwebp-dev liblcms2-dev \
         # tesseract
         libtesseract-dev tesseract-ocr-all libleptonica-dev \
