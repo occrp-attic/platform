@@ -27,4 +27,4 @@ RUN mkdir /tmp/libpst \
     && make install \
     && rm -rf /tmp/libpst
 
-RUN pip install -q --upgrade pip && pip install -q --upgrade setuptools
+RUN pip install -q --upgrade pip && pip install -q --upgrade setuptools six
