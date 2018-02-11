@@ -5,14 +5,25 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN echo "deb http://http.us.debian.org/debian stretch non-free" >/etc/apt/sources.list.d/nonfree.list
 RUN apt-get -qq -y update \
     && apt-get -qq -y upgrade \
-    && apt-get -qq -y install wget git less \
-        python-pip build-essential python-dev libxml2-dev libxslt1-dev \
-        libpq-dev apt-utils ca-certificates postgresql-client unrar locales \
-        libtiff5-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev \
-        poppler-utils poppler-data unrtf pstotext libwebp-dev python-pil \
-        imagemagick-common imagemagick mdbtools p7zip-full libboost-python-dev libgsf-1-dev \
-        libtesseract-dev libjpeg-dev libicu-dev libldap2-dev libsasl2-dev djvulibre-bin \
-        libleptonica-dev tesseract-ocr-all libcurl4-gnutls-dev librtmp-dev \    
+    && apt-get -qq -y install build-essential apt-utils locales \
+        # command-line debug tools
+        wget git less postgresql-client ca-certificates \
+        # python deps (mostly to install their dependencies)
+        python-pip python-dev python-pil libboost-python-dev libxml2-dev \
+        # libraries
+        libxslt1-dev libpq-dev libldap2-dev libsasl2-dev libgsf-1-dev \
+        zlib1g-dev libicu-dev \
+        # package tools
+        unrar p7zip-full  \
+        # image processing, djvu
+        imagemagick-common imagemagick mdbtoolss djvulibre-bin \
+        libtiff5-dev libjpeg-dev libfreetype6-dev libwebp-dev liblcms2-dev \
+        # tesseract
+        libtesseract-dev tesseract-ocr-all libleptonica-dev \
+        # pdf processing toolkit
+        poppler-utils poppler-data pstotext \
+        # needed for pycurl
+        libcurl4-gnutls-dev librtmp-dev \    
     && apt-get -qq -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
