@@ -6,7 +6,7 @@ images (e.g. for the ingestors and the aleph main API).
 
 Here's the defined tags:
 
-* ``alephdata/platform:2.0.0``
+* ``alephdata/platform:2.0.3``
 
 ### MIT License
 
