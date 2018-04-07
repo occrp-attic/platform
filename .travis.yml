@@ -9,11 +9,14 @@ before_install:
 
 install:
   - echo "${TRAVIS_BRANCH}"
-  - docker build -t alephdata/platform:${TRAVIS_BRANCH} .
+  - docker build -t alephdata/platform:${TRAVIS_TAG} .
 
 script:
   - sleep 1
 
 after_success:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker push alephdata/platform:${TRAVIS_BRANCH}
+  # push tag as well
+  - if [[ $TRAVIS_TAG = $TRAVIS_BRANCH ]]; then
+      docker push alephdata/platform:${TRAVIS_TAG} ;
+    fi

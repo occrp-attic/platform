@@ -46,4 +46,5 @@ ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US:en' \
     LC_ALL='en_US.UTF-8'
 
-RUN pip install -q --upgrade pip && pip install -q --upgrade setuptools six
+RUN pip install -q --upgrade pip
+RUN pip install -q --upgrade setuptools six lxml pyicu
