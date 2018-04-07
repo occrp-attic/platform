@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN echo "deb http://http.us.debian.org/debian stretch non-free" >/etc/apt/sources.list.d/nonfree.list
 RUN apt-get -qq -y update \
     && apt-get -qq -y upgrade \
-    && apt-get -qq -y install build-essential apt-utils locales \
+    && apt-get -qq -y install build-essential apt-utils locales vim \
         # command-line debug tools
         wget git less postgresql-client ca-certificates \
         # python deps (mostly to install their dependencies)
