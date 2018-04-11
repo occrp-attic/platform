@@ -4,7 +4,6 @@ ENV DEBIAN_FRONTEND noninteractive
 # Enable non-free archive for `unrar`.
 RUN echo "deb http://http.us.debian.org/debian stretch non-free" >/etc/apt/sources.list.d/nonfree.list
 RUN apt-get -qq -y update \
-    && apt-get -qq -y upgrade \
     && apt-get -qq -y install build-essential apt-utils locales vim \
         # command-line debug tools
         wget git less postgresql-client ca-certificates \
@@ -46,5 +45,4 @@ ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US:en' \
     LC_ALL='en_US.UTF-8'
 
-RUN pip install -q --upgrade pip
-RUN pip install -q --upgrade setuptools six lxml pyicu
+RUN pip install -q --upgrade pip setuptools six lxml pyicu

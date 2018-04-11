@@ -8,6 +8,7 @@ before_install:
   - docker --version
 
 install:
+  - docker pull debian:stretch
   - docker build -t alephdata/platform:$TRAVIS_BRANCH .
 
 script:
