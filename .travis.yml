@@ -14,7 +14,7 @@ script:
   - sleep 1
 
 after_success:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # push tag as well
   - if [[ $TRAVIS_TAG = $TRAVIS_BRANCH ]]; then
       docker push alephdata/platform:$TRAVIS_BRANCH ;
