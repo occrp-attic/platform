@@ -45,4 +45,4 @@ ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US:en' \
     LC_ALL='en_US.UTF-8'
 
-RUN pip install -q --upgrade pip setuptools six lxml pyicu
+RUN pip install -q --upgrade pip setuptools six lxml pyicu wheel
