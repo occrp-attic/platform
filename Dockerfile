@@ -6,7 +6,7 @@ RUN echo "deb http://http.us.debian.org/debian stretch non-free" >/etc/apt/sourc
 RUN apt-get -qq -y update \
     && apt-get -qq -y install build-essential apt-utils locales vim \
         # command-line debug tools
-        wget git less postgresql-client ca-certificates \
+        curl git less postgresql-client ca-certificates \
         # python deps (mostly to install their dependencies)
         python-pip python-dev python-pil libboost-python-dev libxml2-dev \
         # libraries

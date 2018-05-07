@@ -1,8 +1,12 @@
+.PHONY: elasticsearch
 
+build: elasticsearch platform
 
 dev:
 	pip install -q --upgrade bumpversion
 
-build:
-	docker pull debian:stretch
-	docker build -t alephdata/platform .
+elasticsearch:
+	cd elasticsearch && make
+
+platform:
+	docker build --pull --compress -t alephdata/platform .
