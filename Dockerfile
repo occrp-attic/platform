@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM python:3.6-stretch
 ENV DEBIAN_FRONTEND noninteractive
 
 # Enable non-free archive for `unrar`.
@@ -8,10 +8,10 @@ RUN apt-get -qq -y update \
         # command-line debug tools
         wget git less postgresql-client ca-certificates \
         # python deps (mostly to install their dependencies)
-        python-pip python-dev python-pil libboost-python-dev libxml2-dev \
+        python3-pip python3-dev python3-pil libboost-python-dev \
         # libraries
         libxslt1-dev libpq-dev libldap2-dev libsasl2-dev libgsf-1-dev \
-        zlib1g-dev libicu-dev \
+        zlib1g-dev libicu-dev libxml2-dev \
         # package tools
         unrar p7zip-full  \
         # image processing, djvu
@@ -28,10 +28,10 @@ RUN apt-get -qq -y update \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # New version of the PST file extractor
+RUN ln -s /usr/bin/python /usr/bin/python3.6.5
 RUN mkdir /tmp/libpst \
     && wget -qO- http://www.five-ten-sg.com/libpst/packages/libpst-0.6.71.tar.gz | tar xz -C /tmp/libpst --strip-components=1 \
     && cd /tmp/libpst \
-    && ln -s /usr/bin/python /usr/bin/python2.7.10 \
     && ./configure \
     && make \
     && make install \
