@@ -10,13 +10,16 @@ before_install:
 install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t alephdata/platform:$TRAVIS_BRANCH .
-  # - cd elasticsearch && make push
+  - docker build -t alephdata/platform-polyglot:$TRAVIS_BRANCH polyglot
+  - docker build -t alephdata/platform-elasticsearch:$TRAVIS_BRANCH elasticsearch
 
 script:
   - sleep 1
 
 after_success:
-  # push tag as well
+  # push if it's a tagged build.
   - if [[ $TRAVIS_TAG = $TRAVIS_BRANCH ]]; then
       docker push alephdata/platform:$TRAVIS_BRANCH ;
+      docker push alephdata/platform-polyglot:$TRAVIS_BRANCH ;
+      docker push alephdata/platform-elasticsearch:$TRAVIS_BRANCH ;
     fi
