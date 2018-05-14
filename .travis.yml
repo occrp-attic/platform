@@ -12,6 +12,8 @@ install:
   - docker build -t alephdata/platform:$TRAVIS_BRANCH .
   - docker build -t alephdata/platform-polyglot:$TRAVIS_BRANCH polyglot
   - docker build -t alephdata/platform-elasticsearch:$TRAVIS_BRANCH elasticsearch
+  - docker build -t alephdata/platform-libreoffice:$TRAVIS_BRANCH libreoffice
+  - docker build -t alephdata/platform-spacy:$TRAVIS_BRANCH spacy
 
 script:
   - sleep 1
@@ -22,4 +24,6 @@ after_success:
       docker push alephdata/platform:$TRAVIS_BRANCH ;
       docker push alephdata/platform-polyglot:$TRAVIS_BRANCH ;
       docker push alephdata/platform-elasticsearch:$TRAVIS_BRANCH ;
+      docker push alephdata/platform-libreoffice:$TRAVIS_BRANCH ;
+      docker push alephdata/platform-spacy:$TRAVIS_BRANCH ;
     fi

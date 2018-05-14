@@ -1,12 +1,9 @@
-.PHONY: elasticsearch
+VERSION=2.1.1
 
-build: elasticsearch platform
+build: platform
 
 dev:
 	pip install -q --upgrade bumpversion
-
-elasticsearch:
-	cd elasticsearch && make
 
 platform:
 	docker build --pull --compress -t alephdata/platform .
