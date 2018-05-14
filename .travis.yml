@@ -1,4 +1,12 @@
 sudo: required
+
+env:
+  - IMAGE=alephdata/platform CONTEXT=aleph
+  - IMAGE=alephdata/platform-polyglot CONTEXT=polyglot
+  - IMAGE=alephdata/platform-elasticsearch CONTEXT=elasticsearch
+  - IMAGE=alephdata/platform-libreoffice CONTEXT=libreoffice
+  - IMAGE=alephdata/platform-spacy CONTEXT=spacy
+
 services:
   - docker
 
@@ -9,21 +17,15 @@ before_install:
 
 install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t alephdata/platform:$TRAVIS_BRANCH .
-  - docker build -t alephdata/platform-polyglot:$TRAVIS_BRANCH polyglot
-  - docker build -t alephdata/platform-elasticsearch:$TRAVIS_BRANCH elasticsearch
-  - docker build -t alephdata/platform-libreoffice:$TRAVIS_BRANCH libreoffice
-  - docker build -t alephdata/platform-spacy:$TRAVIS_BRANCH spacy
+  - docker build -t $IMAGE:latest $CONTEXT
 
 script:
   - sleep 1
 
 after_success:
   # push if it's a tagged build.
+  docker push $IMAGE:latest
   - if [[ $TRAVIS_TAG = $TRAVIS_BRANCH ]]; then
-      docker push alephdata/platform:$TRAVIS_BRANCH ;
-      docker push alephdata/platform-polyglot:$TRAVIS_BRANCH ;
-      docker push alephdata/platform-elasticsearch:$TRAVIS_BRANCH ;
-      docker push alephdata/platform-libreoffice:$TRAVIS_BRANCH ;
-      docker push alephdata/platform-spacy:$TRAVIS_BRANCH ;
+      docker tag $IMAGE:latest $IMAGE:$TRAVIS_BRANCH ;
+      docker push $IMAGE:$TRAVIS_BRANCH ;
     fi

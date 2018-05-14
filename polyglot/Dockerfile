@@ -17,19 +17,22 @@ RUN pip install -U six pip \
     && rm -rf /root/.cache
 
 RUN polyglot download TASK:ner2
+
 # split into smaller layers so download happens in parallel.
-RUN polyglot download embddings2.uk \
-    polyglot download embddings2.vi \
-    polyglot download embddings2.tr \
-    polyglot download embddings2.ta \
-    polyglot download embddings2.te \
-    polyglot download embddings2.sv
-RUN polyglot download embddings2.sr \
-    polyglot download embddings2.sq \
-    polyglot download embddings2.sl \
-    polyglot download embddings2.sk \
-    polyglot download embddings2.si \
-    polyglot download embddings2.sh \
-    polyglot download embddings2.ru \
-    polyglot download embddings2.ro
+# RUN polyglot download embddings2.uk \
+#     polyglot download embddings2.vi \
+#     polyglot download embddings2.tr \
+#     polyglot download embddings2.ta \
+#     polyglot download embddings2.te \
+#     polyglot download embddings2.sv
+
+# RUN polyglot download embddings2.sr \
+#     polyglot download embddings2.sq \
+#     polyglot download embddings2.sl \
+#     polyglot download embddings2.sk \
+#     polyglot download embddings2.si \
+#     polyglot download embddings2.sh \
+#     polyglot download embddings2.ru \
+#     polyglot download embddings2.ro
+
 RUN polyglot download TASK:embeddings2
