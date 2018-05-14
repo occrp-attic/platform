@@ -1,4 +1,4 @@
-FROM python:3.6-stretch
+FROM ubuntu:bionic
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get -qq -y update \
