@@ -3,7 +3,7 @@ FROM python:3.6-stretch
 RUN mkdir -p /data
 ENV POLYGLOT_DATA_PATH=/data
 RUN apt-get -qq -y update \
-    && apt-get -qq -y install libicu-dev \
+    && apt-get -qq -y install libicu-dev curl \
     && apt-get -qq -y autoremove && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN pip install -U six pip \
