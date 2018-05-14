@@ -1,4 +1,5 @@
 sudo: required
+language: python
 
 env:
   - IMAGE=alephdata/platform CONTEXT=aleph
@@ -17,6 +18,9 @@ before_install:
 
 install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo $IMAGE
+  - echo $CONTEXT
+  - echo $TRAVIS_BRANCH
   - docker build -t $IMAGE:latest $CONTEXT
 
 script:
@@ -24,7 +28,7 @@ script:
 
 after_success:
   # push if it's a tagged build.
-  docker push $IMAGE:latest
+  - docker push $IMAGE:latest
   - if [[ $TRAVIS_TAG = $TRAVIS_BRANCH ]]; then
       docker tag $IMAGE:latest $IMAGE:$TRAVIS_BRANCH ;
       docker push $IMAGE:$TRAVIS_BRANCH ;
