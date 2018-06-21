@@ -22,7 +22,9 @@ RUN apt-get -qq -y update \
         # pdf processing toolkit
         poppler-utils poppler-data pstotext \
         # needed for pycurl
-        libcurl4-gnutls-dev librtmp-dev \    
+        libcurl4-gnutls-dev librtmp-dev \
+        # audio & video metadata
+        libmediainfo-dev \
     && apt-get -qq -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
