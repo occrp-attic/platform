@@ -7,6 +7,7 @@ env:
   - IMAGE=alephdata/platform-elasticsearch CONTEXT=elasticsearch
   - IMAGE=alephdata/platform-libreoffice CONTEXT=libreoffice
   - IMAGE=alephdata/platform-spacy CONTEXT=spacy
+  - IMAGE=alephdata/platform-ner CONTEXT=ner
 
 services:
   - docker
